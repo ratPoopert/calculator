@@ -1,0 +1,243 @@
+@font-face {
+    font-family: 'digital-7';
+    src: url(./digital-7\ \(mono\).ttf);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Spartan&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@900&display=swap');
+
+:root {
+
+    /* colors */
+    --border-color: #073648;
+    --body-color: #035297;
+    --body-highlight: #0c5d9f;
+    --body-shadow: #07354c;
+    --button-red-background: #d83035;
+    --button-red-highlight: #ee505f;
+    --button-red-shadow: #bb1f2c;
+    --button-white-background: #f2f2f2;
+    --button-white-highlight: #f7faf3;
+    --button-white-shadow:#cac8c8;
+    --display-background: #b3b3b3;
+    --display-border: #4c4b4e;
+    --solar-panel-background: #191f1b;
+    --solar-panel-border: #010300;
+    --text-color-light: #e8fdff;
+    --text-color-dark: #071f3e;
+
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-image: url(./desk.jpg);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.calculator {
+    background-color: var(--body-color);
+    box-shadow: 0.5em 0.5em 0.5em var(--body-shadow);
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border-top-left-radius: 0.25em;
+    border-top-right-radius: 0.25em;
+    display: grid;
+    grid-template-rows: [top-row-start] 4% 
+    [top-row-end display-row-start] 12% 
+	[display-row-end mid-row-start] 17% 
+	[mid-row-end buttons-row-start] 61%
+	[buttons-row-end] 6% [end];
+    font-size: 2.4rem;
+    height: 28.56em;
+    margin-top: 5%;
+    width: 17em;
+}
+
+button {
+    /* border: 0.4rem outset var(--body-shadow); */
+    border-style: outset;
+    border-radius: 0.5em;
+    box-shadow: 0.1em 0.2em 0.1em var(--body-shadow);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+button:active {
+    box-shadow: 0 0 0 0;
+    transform: translateY(0.1em)
+}
+
+.buttons {
+    grid-row-start: buttons-row-start;
+    grid-row-end: buttons-row-end;
+    padding: 2rem 1rem 0;
+}
+
+.buttons-box {
+    border-radius: 1rem;
+    border: 0.5rem groove var(--body-highlight);
+    display: grid;
+    gap: 11%;
+    grid-template-columns: 68% 21%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.display {
+    border-top: 0.2em solid var(--border-color);
+    display: inline-grid;
+    grid-row-start: display-row-start;
+    grid-row-end: display-row-end;
+    grid-template-columns: 1fr 7fr 1fr;
+    height: auto;
+    text-align: right;
+    width: 100%;
+}
+
+.display-area {
+    background-color: var(--display-border);
+    border: 0.5rem inset var(--border-color);
+    padding: 0.4em;
+}
+
+.display-left-border, 
+.display-right-border {
+    background: linear-gradient(315deg, transparent 75%, var(--body-highlight) 0)-10px 0,
+    linear-gradient(45deg, transparent 75%, var(--body-highlight) 0)-10px 0,
+    linear-gradient(135deg, var(--body-color) 50%, transparent 0) 0 0,
+    linear-gradient(45deg, var(--border-color) 50%, var(--body-shadow) 0) 0 0 var(--body-shadow);
+    background-size: 0.05em 0.05em;
+    border-bottom: var(--body-shadow) 0.15em solid;
+}
+
+.display-left-border {
+    border-right: var(--border-color) 0.2em solid;
+}
+.display-right-border {
+    border-left: var(--body-highlight) 0.2em solid;
+}
+
+.display-text {
+    background-color: var(--display-background);
+    border: 0.2rem inset;
+    border-radius: 0.1em;
+    font-family: 'digital-7', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    margin: 0;
+    padding: 0.1em;
+}
+
+.info {
+    display: inline-grid;
+    grid-template-columns: 3fr 2fr;
+    width: 100%;
+    grid-row-start: 1;
+}
+
+.left-buttons {
+    display: grid;
+    gap: 2rem 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.manufacturer {
+    color: var(--text-color-light);
+    font-family: 'Spartan', sans-serif;
+    font-size: 2rem;
+    margin: 0;
+    padding-top: 0.2em;
+    text-align: left;
+}
+
+.middle {
+    border-bottom: 0.5rem groove var(--body-highlight);
+    border-top: 0.2rem solid var(--body-highlight);
+    grid-row-start: mid-row-start;
+    grid-row-end: mid-row-end;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    padding: 1rem 1.5rem;
+}
+
+.model {
+    color: var(--text-color-light);
+    font-family: 'Roboto Slab', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    margin: 0;
+    text-align: right;
+}
+
+.number-button{
+    background-color: var(--button-white-background);
+    border-color: var(--button-white-shadow);
+    color: var(--text-color-dark);
+}
+
+.number-button:hover {
+    background-color: var(--button-white-shadow);
+}
+
+.number-button:active {
+    border: 0.1em inset var(--button-white-shadow);
+    background-color: var(--button-white-shadow);
+}
+
+.operator-button {
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+
+.operator-button,
+.special-button {
+    background-color: var(--button-red-background);
+    color: var(--text-color-light);
+    border-color: var(--button-red-shadow);
+}
+
+.operator-button:hover,
+.special-button:hover {
+    background-color: var(--button-red-shadow);
+    color: var(--button-white-shadow)
+}
+
+.operator-button:active,
+.special-button:active {
+    border: 0.1em inset var(--button-red-shadow);
+}
+
+.right-buttons {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 2rem;
+}
+
+#equals-button {
+    grid-row: -3 / -1;
+}
+
+.solar-panel {
+    background-color: var(--solar-panel-background);
+    border: 0.3rem inset var(--solar-panel-border);
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.solar-panel-line {
+    border-left: 0.3rem solid var(--solar-panel-border);
+}
+
+.solar-area {
+    display: inline-grid;
+    grid-row-start: 2;
+    grid-template-columns: 1fr 1fr;
+}

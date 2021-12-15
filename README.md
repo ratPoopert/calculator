@@ -37,3 +37,7 @@ The `operate(operator, x, y)` function captures the desired operation and passes
 
 * As the number buttons are pressed, their value will be displayed in large text.
 * When a number button is pressed after an operator is selected, the value of the selected numbers will replace the numbers selected prior to the operator's selection.
+
+## Thank you to...
+
+* Paul Salentiny for his [Pyramid](https://projects.verou.me/css3patterns/#pyramid) CSS3 background pattern, which let me add texture to the areas to the left and right of the display.

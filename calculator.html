@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script src="calculator.js" type="module" defer></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="calculator" class="calculator">
+        <div id="display" class="display">
+            <div id="display-left-border" class="display-left-border"></div>
+            <div id="display-area" class="display-area">
+                <p id="display-text" class="display-text">0</p>
+            </div>
+            <div id="display-right-border" class="display-right-border"></div>
+        </div>
+        <div id="calculator-middle" class="middle">
+            <div id="calculator-info" class="info">
+                <p id="manufacturer" class="manufacturer">POOPY INSTRUMENTS</p>
+                <p id="model" class="model">PI-108</p>
+            </div>
+            <div id="solar-area" class="solar-area">
+                <div id="solar-panel" class="solar-panel">
+                    <div id="solar-panel-line-1" class="solar-panel-line"></div>
+                    <div id="solar-panel-line-2" class="solar-panel-line"></div>
+                    <div id="solar-panel-line-3" class="solar-panel-line"></div>
+                    <div id="solar-panel-line-4" class="solar-panel-line"></div>
+                </div>
+                <div id="solar-area-void" class="solar-area-void"></div>
+            </div>
+        </div>
+        <div id="buttons" class="buttons">
+            <div id="buttons-box" class="buttons-box">
+                <div id="left-buttons" class="left-buttons">
+                    <button id="toggle-neg-button" class="special-button">&plus;/&minus;</button>
+                    <button id="sqrt-button" class="special-button">&Sqrt;</button>
+                    <button id="mod-button" class="special-button">&percnt;</button>
+                    <button id="clear-mem-button" class="special-button">MRC</button>
+                    <button id="mem-remove-button" class="special-button">M&minus;</button>
+                    <button id="mem-add-button" class="special-button">M&plus;</button>
+                    <button id="seven-button" class="number-button" value="7">7</button>
+                    <button id="eight-button" class="number-button" value="8">8</button>
+                    <button id="nine-button" class="number-button" value="9">9</button>
+                    <button id="four-button" class="number-button" value="4">4</button>
+                    <button id="five-button" class="number-button" value="5">5</button>
+                    <button id="six-button" class="number-button" value="6">6</button>
+                    <button id="one-button" class="number-button" value="1">1</button>
+                    <button id="two-button" class="number-button" value="2">2</button>
+                    <button id="three-button" class="number-button" value="3">3</button>
+                    <button id="on-button" class="special-button">ON/C</button>
+                    <button id="zero-button" class="number-button" value="0">0</button>
+                    <button id="dot-button" class="number-button" value=".">.</button>
+                </div>
+                <div id="right-buttons" class="right-buttons">
+                    <button id="add-button" class="operator-button" value="add">&plus;</button>
+                    <button id="subtract-button" class="operator-button" value="subtract">&minus;</button>
+                    <button id="multiply-button" class="operator-button" value="multiply">&times;</button>
+                    <button id="divide-button" class="operator-button" value="divide">&divide;</button>
+                    <button id="equals-button" class="special-button">&equals;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
