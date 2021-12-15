@@ -90,7 +90,7 @@ button:active {
 }
 
 .display {
-    border-top: 0.2em solid var(--border-color);
+    border-top: 0.5rem groove var(--border-color);
     display: inline-grid;
     grid-row-start: display-row-start;
     grid-row-end: display-row-end;
@@ -158,8 +158,8 @@ button:active {
 }
 
 .middle {
+    border-top: 0.5rem groove var(--body-highlight);
     border-bottom: 0.5rem groove var(--body-highlight);
-    border-top: 0.2rem solid var(--body-highlight);
     grid-row-start: mid-row-start;
     grid-row-end: mid-row-end;
     display: grid;
