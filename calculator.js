@@ -1,98 +1,161 @@
-import * as operations from './operations.js';
+class Calculator {
+    
+    constructor(displayTextElement) {
+        this.displayTextElement = displayTextElement;
+        this.clearMemory();
+        this.clearDisplay();
+    }
+    
+    MAX_DISPLAY_WIDTH = 11;
 
-const MAX_DISPLAY_WIDTH = 11;
+    appendNumber(number) {
+        if (this.currentValue.length >= this.MAX_DISPLAY_WIDTH) return;
+        if (number === '.' && this.currentValue.includes('.')) return;
+        
+        if (this.overwriteDisplay === true) {
+            this.currentValue = number.toString();
+            this.overwriteDisplay = false;
+        } else {
+            this.currentValue = this.currentValue.toString() + number.toString();
+        }
+    }
 
-const updateDisplay = value => $display.textContent = value;
-const setOperand = value => parseFloat(value);
+    clearDisplay() {
+        this.displayTextElement.textContent = "0";
+        if (this.overwriteDisplay) this.clearMemory();
+        this.overwriteDisplay = true;
+    }
+    
+    clearMemory() {
+        this.operator = undefined;
+        this.currentValue = '';
+        this.previousValue = '';
+    }
+    
+    evaluateExpression(){
+        let result;
+        const previousOperand = parseFloat(this.previousValue);
+        const currentOperand = parseFloat(this.currentValue);
+        if (isNaN(previousOperand) || isNaN(currentOperand)) return;
+        switch (this.operator) {
+            case 'add': result = previousOperand + currentOperand; break;
+            case 'subtract': result = previousOperand - currentOperand; break;
+            case 'multiply': result = previousOperand * currentOperand; break;
+            case 'divide': {
+                if (currentOperand === 0) {result = "!GOD"}
+                else {result = previousOperand / currentOperand;} 
+                break;
+            }
+            case 'mod': result = previousOperand % currentOperand; break;
+            default: return;
+        }
+        if (result === "!GOD") {this.currentValue = result}
+        else {
+            result.toFixed(2).replace(/[.,]0+$/, '')
+            this.currentValue = result;
+        }
+        this.updateDisplay();
+        this.operator = undefined;
+        this.previousValue = '';
+        this.overwriteDisplay = true;
+    }
+    
+    setOperator(operator) {
+        if (this.currentValue === '') return;
+        if (this.previousValue !== '') {
+            this.evaluateExpression();
+        }
+        this.operator = operator;
+        this.previousValue = this.currentValue;
+        this.currentValue = '';
+        this.overwriteDisplay = true;
+    }
 
-let currentValue;
-let operand1;
-let operand2;
-let operator;
-let solution;
-let overwriteDisplay = true;
+    getSquareRoot() {
+        if (this.currentValue === "0") return;
+        this.currentValue = Math.sqrt(parseFloat(this.currentValue));
+        this.overwriteDisplay = true;
+        this.updateDisplay();
+    }
 
-const $display = document.getElementById('display-text');
+    toggleNegative() {
+        if (this.overwriteDisplay === true) return;
+        if (this.currentValue.includes('-')) {this.currentValue = this.currentValue.replace('-', '')}
+        else {this.currentValue = `-${this.currentValue}`}
+
+        this.updateDisplay();
+    }
+
+    updateDisplay() {
+        if (this.currentValue.toString().length > this.MAX_DISPLAY_WIDTH) {
+            this.currentValue = parseFloat(this.currentValue).toExponential(2)
+        }
+        this.displayTextElement.textContent = this.currentValue;
+    }
+}
+
+const $clearMemButton = document.getElementById('clear-mem-button');
+const $memAddButton = document.getElementById('mem-add-button');
+const $memRemoveButton  = document.getElementById('mem-remove-button');
+const $displayText = document.getElementById('display-text');
 const $numberButtons = Array.from(document.querySelectorAll('.number-button'));
-const $dotButton = document.getElementById('dot-button');
 const $operatorButtons = Array.from(document.querySelectorAll('.operator-button'));
 const $equalsButton = document.getElementById('equals-button');
+const $modButton = document.getElementById('mod-button');
 const $onButton = document.getElementById('on-button');
+const $sqrtButton = document.getElementById('sqrt-button');
 const $toggleNegButton = document.getElementById('toggle-neg-button');
 
-const evaluateExpression = () => {
-    operand2 = setOperand(currentValue);
-    solution = parseFloat(operations.operate([operand1, operand2], operator));
-    solution = solution.toFixed(2).replace(/[.,]0+$/, '');
-    if (solution.toString().length > MAX_DISPLAY_WIDTH) { solution = parseFloat(solution).toExponential(2) }
-    console.log(`Solution: ${solution}`);
-    currentValue = solution;
-    updateDisplay(currentValue);
-    operand1 = setOperand(currentValue);
-    operand2 = undefined;
-    operator = undefined;
-    overwriteDisplay = true;
-    $dotButton.disabled = false;
-};
+const calculator = new Calculator($displayText)
 
-
-$numberButtons.forEach( numberButton => 
-    numberButton.addEventListener('click', e => {
-    if (overwriteDisplay) {
-        currentValue = e.target.value;
-        updateDisplay(currentValue);
-        overwriteDisplay = false;
-    }
-    else if (e.target.id === 'dot-button') {
-        e.target.disabled = true;
-        currentValue += e.target.value;
-    }
-    else if ($display.textContent.length < MAX_DISPLAY_WIDTH) {
-        currentValue += e.target.value;;
-    }
-    updateDisplay(currentValue);
-}));
-
-$operatorButtons.forEach(operatorButton => operatorButton.addEventListener('click', e => {
-    if (operator) {
-        evaluateExpression()
-    } else {
-        operand1 = setOperand(currentValue);
-    }
-    switch (e.target.value) {
-        case 'add': operator = operations.add; break;
-        case 'subtract': operator = operations.subtract; break;
-        case 'multiply': operator = operations.multiply; break;
-        case 'divide': operator = operations.divide; break;
-    }
-    overwriteDisplay = true;
-    $dotButton.disabled = false;
-}));
-
-$equalsButton.addEventListener('click', e => {
-    evaluateExpression();
+$clearMemButton.addEventListener('click', () => {
+    calculator.currentValue = "I REMEMBER";
+    calculator.updateDisplay();
+    calculator.overwriteDisplay = true;
 })
 
-$onButton.addEventListener('click', e => {
-    const clearMem = () => {
-        operand1 = undefined;
-        operand2 = undefined;
-        operator = undefined;
-    }
+$equalsButton.addEventListener('click', () => {
+    calculator.evaluateExpression();
+    calculator.updateDisplay();
+});
 
-    if (overwriteDisplay) {clearMem()}
-    currentValue = '0';
-    overwriteDisplay = true;
-    $dotButton.disabled = false;
-    updateDisplay(currentValue);
+$memAddButton.addEventListener('click', () => {
+    calculator.currentValue = "I LEARN";
+    calculator.updateDisplay();
+    calculator.overwriteDisplay = true;
+});
+
+$memRemoveButton.addEventListener('click', () => {
+    calculator.currentValue = "I FORGET";
+    calculator.updateDisplay();
+    calculator.overwriteDisplay = true;
+});
+
+$modButton.addEventListener('click', () => {
+    calculator.setOperator('mod');
+});
+
+$numberButtons.forEach( numberButton => {
+    numberButton.addEventListener('click', () => {
+        calculator.appendNumber(numberButton.value);
+        calculator.updateDisplay();
+    });
+});
+
+$onButton.addEventListener('click', () => {
+    calculator.clearDisplay();
+});
+
+$operatorButtons.forEach( operatorButton => {
+    operatorButton.addEventListener('click', () => {
+        calculator.setOperator(operatorButton.value);
+    });
+});
+
+$sqrtButton.addEventListener('click', () => {
+    calculator.getSquareRoot();
 });
 
 $toggleNegButton.addEventListener('click', () => {
-    const minusRegEx = /^[-]/;
-    
-    currentValue.match(minusRegEx)
-    ? currentValue = currentValue.replace('-', '')
-    : currentValue = `-${currentValue}`;
-    
-    updateDisplay(currentValue);
+    calculator.toggleNegative();
 });
