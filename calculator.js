@@ -115,6 +115,7 @@ $clearMemButton.addEventListener('click', () => {
 })
 
 $equalsButton.addEventListener('click', () => {
+    if (calculator.currentValue === '') return;
     calculator.evaluateExpression();
     calculator.updateDisplay();
 });
