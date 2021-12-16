@@ -8,7 +8,7 @@ Aside from the background image, all visuals are pure CSS.
 
 In retrospect, I quickly went down the rabbit hole on this one. My commit history as of this writing is sparse. With that said, I'm very proud of the result and learned a ton on this project.
 
-Early on in the project I decided to simulate the TI-108, which gave me a target to shoot for. As my knowledge of CSS grows in the future, I'd like to add more life-like effects:
+Early on in the project I decided to simulate the [TI-108](https://en.wikipedia.org/wiki/TI-108), which gave me a target to shoot for. As my knowledge of CSS grows in the future, I'd like to add more life-like effects:
 
 * Make the display fade out when the cursor is hovered over the solar panel.
 * Make the display simulate the holographic distortion you get when pushing your finger on an LCD display.
