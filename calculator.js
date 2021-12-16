@@ -31,6 +31,10 @@ class Calculator {
         this.currentValue = '';
         this.previousValue = '';
     }
+
+    dimDisplay() {
+
+    }
     
     evaluateExpression(){
         let result;
@@ -103,6 +107,7 @@ const $operatorButtons = Array.from(document.querySelectorAll('.operator-button'
 const $equalsButton = document.getElementById('equals-button');
 const $modButton = document.getElementById('mod-button');
 const $onButton = document.getElementById('on-button');
+const $solarPanel = document.getElementById('solar-panel');
 const $sqrtButton = document.getElementById('sqrt-button');
 const $toggleNegButton = document.getElementById('toggle-neg-button');
 
@@ -151,6 +156,14 @@ $operatorButtons.forEach( operatorButton => {
     operatorButton.addEventListener('click', () => {
         calculator.setOperator(operatorButton.value);
     });
+});
+
+$solarPanel.addEventListener('mouseleave', () => {
+    $displayText.classList.remove('display-text--fade-out');
+});
+
+$solarPanel.addEventListener('mouseenter', () => {
+    $displayText.classList.add('display-text--fade-out');
 });
 
 $sqrtButton.addEventListener('click', () => {
