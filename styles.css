@@ -127,6 +127,7 @@ button:active {
     background-color: var(--display-background);
     border: 0.2rem inset;
     border-radius: 0.1em;
+    color: rgba(0, 0, 0, 0.9);
     font-family: 'digital-7', sans-serif;
     font-size: 5rem;
     font-weight: 800;
