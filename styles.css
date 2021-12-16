@@ -76,6 +76,7 @@ button:active {
 .buttons {
     grid-row-start: buttons-row-start;
     grid-row-end: buttons-row-end;
+    margin-bottom: 3rem;
     padding: 2rem 1rem 0;
 }
 
